@@ -1,0 +1,24 @@
+#!/usr/bin/zsh
+# Set audio sinks before using!
+# Use `pactl list sinks` to see available sinks if on PulseAudio.
+
+headphones() {
+  pacmd set-default-sink "alsa_output.pci-0000_00_1f.3.analog-stereo" &
+  notify-send "Audio switched to headphones!"
+}
+
+bluetooth() {
+  pacmd set-default-sink "bluez_sink.3C_B0_ED_9A_22_75.a2dp_sink" &
+  notify-send "Audio switched to bluetooth!"
+}
+
+choosespeakers() {
+  local choice=$(printf "Headphones\nBluetooth" | rofi -dmenu -i -p "Choose output:" -lines 2)
+  case "$choice" in
+    Headphones) headphones ;;
+    Bluetooth) bluetooth ;;
+  esac
+}
+
+choosespeakers
+

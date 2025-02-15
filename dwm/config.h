@@ -141,8 +141,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-    { 0,                  XF86XK_Tools,               spawn,          SHCMD("spotify &") },
-    { 0|ShiftMask,        XF86XK_Tools,               spawn,          SHCMD("vlc /mnt/HDD/Music/Playlist-1.xspf &") },
+    { 0,                  XF86XK_Tools,               spawn,          SHCMD("vlc") },
+    { 0|ShiftMask,        XF86XK_Tools,               spawn,          SHCMD("~/Suckless/dmenu/Scripts/dmenu_audioswitch") },
     { 0,                  XF86XK_AudioPlay,           spawn,          SHCMD("/home/oc/Scripts/media-play-pause.zsh") },
     { 0,                  XF86XK_AudioNext,           spawn,          SHCMD("/home/oc/Scripts/media-next.zsh") },
     { 0,                  XF86XK_AudioPrev,           spawn,          SHCMD("/home/oc/Scripts/media-previous.zsh") },
