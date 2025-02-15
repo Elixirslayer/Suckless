@@ -1,8 +1,7 @@
 #!/bin/zsh
 
-#Echo the GPU Temperature
-echo "$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)°C"
 
+gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)
 
-
-
+#echo the usage/percentage
+echo "${gpu_temp}°C"

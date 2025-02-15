@@ -42,10 +42,13 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "firefox-nightly",     NULL,       NULL,       1 << 0,            0,           -1 },
+	{ "LibreWold",     NULL,       NULL,       1 << 0,            0,           -1 },
 	{ "Spotify",     NULL,       NULL,       1 << 7,            0,           -1 },
 	{ "YouTube Music",     NULL,       NULL,       1 << 7,            0,           -1 },
+	{ "vlc",     NULL,       NULL,       1 << 7,            0,           -1 },
 	{ "KeePassXC",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "Galculator",  NULL,       NULL,       0,       1,           -1 },
+	{ "copyq",  NULL,       NULL,       0,       1,           -1 },
 };
 
 /* layout(s) */
@@ -86,11 +89,14 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 //	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-    { Mod4Mask,                     XK_f,      spawn,          SHCMD("firefox-nightly") }, 
+    { Mod4Mask|ShiftMask,                     XK_f,      spawn,          SHCMD("firefox-nightly") }, 
+    { Mod4Mask,                     XK_f,      spawn,          SHCMD("librewolf") }, 
     { MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("pcmanfm") }, 
 	{ 0,    	                XK_Print,  spawn,         {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-selection.zsh", NULL}} },
     { Mod4Mask,                     XK_Print,  spawn,         {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-full.zsh", NULL}} }, 
     { Mod4Mask,                     XK_e,     spawn,          SHCMD("rofi -modi emoji -show emoji") }, 
+    { Mod4Mask,                     XK_c,     spawn,          SHCMD("copyq") }, 
+    { Mod4Mask,                     XK_s,     spawn,          SHCMD("unipicker --command 'rofi -dmenu' --copy-command 'xclip -selection clipboard'") }, 
 	{ MODKEY|ControlMask|ShiftMask, XK_r,      spawn,          SHCMD("reboot") }, 
     { MODKEY|ShiftMask, 		XK_Delete, spawn,          SHCMD("poweroff") }, 
     { MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          SHCMD("systemctl suspend") }, 
@@ -136,18 +142,27 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { 0,                  XF86XK_Tools,               spawn,          SHCMD("spotify &") },
-    { 0,                  XF86XK_AudioPlay,           spawn,          SHCMD("playerctl play-pause") },
-    { 0,                  XF86XK_AudioNext,           spawn,          SHCMD("playerctl next") },
-    { 0,                  XF86XK_AudioPrev,           spawn,          SHCMD("playerctl previous") },
-    { 0,                  XF86XK_AudioStop,           spawn,          SHCMD("playerctl stop") },
-    { 0,                  XF86XK_AudioRaiseVolume,    spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
-    { 0,                  XF86XK_AudioLowerVolume,    spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
-    { 0,                  XF86XK_AudioMute,           spawn,          SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
+    { 0|ShiftMask,        XF86XK_Tools,               spawn,          SHCMD("vlc /mnt/HDD/Music/Playlist-1.xspf &") },
+    { 0,                  XF86XK_AudioPlay,           spawn,          SHCMD("/home/oc/Scripts/media-play-pause.zsh") },
+    { 0,                  XF86XK_AudioNext,           spawn,          SHCMD("/home/oc/Scripts/media-next.zsh") },
+    { 0,                  XF86XK_AudioPrev,           spawn,          SHCMD("/home/oc/Scripts/media-previous.zsh") },
+    { 0,                  XF86XK_AudioStop,           spawn,          SHCMD("/home/oc/Scripts/media-stop.zsh") },
+    { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 -f 'dwmblocks'") },
+    { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 -f 'dwmblocks'") },
+    { 0, XF86XK_AudioMute, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 -f 'dwmblocks'") }
 };
     /* button definitions */
     /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
     static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
+    //{ ClkWinTitle,          0,              Button2,        zoom, {0} },
+    //{ ClkStatusText,        0,              Button1,        sigdwmblocks, {.i = 1} },
+    //{ ClkStatusText,        0,              Button2,        sigdwmblocks, {.i = 2} },
+    //{ ClkStatusText,        0,              Button3,        sigdwmblocks, {.i = 3} },
+    //{ ClkStatusText,        0,              Button4,        sigdwmblocks, {.i = 4} },
+    //{ ClkStatusText,        0,              Button5,        sigdwmblocks, {.i = 5} },
+    //{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks, {.i = 6} },
+    //{ ClkStatusText,        ShiftMask,      Button3,        spawn, SHCMD("st -e") },
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
