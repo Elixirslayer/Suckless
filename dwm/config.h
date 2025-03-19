@@ -75,6 +75,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define STATUSBAR "dwmblocks"
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -92,13 +93,15 @@ static const Key keys[] = {
     { Mod4Mask|ShiftMask,                     XK_f,      spawn,          SHCMD("firefox-nightly") }, 
     { Mod4Mask,                     XK_f,      spawn,          SHCMD("librewolf") }, 
     { MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("pcmanfm") }, 
-	{ 0,    	                XK_Print,  spawn,         {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-selection.zsh", NULL}} },
-    { Mod4Mask,                     XK_Print,  spawn,         {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-full.zsh", NULL}} }, 
-    { Mod4Mask,                     XK_e,     spawn,          SHCMD("rofi -modi emoji -show emoji") }, 
-    { Mod4Mask,                     XK_c,     spawn,          SHCMD("copyq") }, 
-    { Mod4Mask,                     XK_s,     spawn,          SHCMD("unipicker --command 'rofi -dmenu' --copy-command 'xclip -selection clipboard'") }, 
+	{ 0,    	                    XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-selection.zsh", NULL}} },
+    { Mod4Mask,                     XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-full.zsh", NULL}} }, 
+    { Mod4Mask,                     XK_c,  spawn,              SHCMD("/home/oc/Scripts/clip.sh add") }, 
+    { Mod4Mask,                     XK_v,  spawn,              SHCMD("/home/oc/Scripts/clip.sh sel") }, 
+    { Mod4Mask,                     XK_e,     spawn,           SHCMD("rofi -modi emoji -show emoji") }, 
+    { Mod4Mask,                     XK_c,     spawn,           SHCMD("copyq") }, 
+    { Mod4Mask,                     XK_s,     spawn,           SHCMD("unipicker --command 'rofi -dmenu' --copy-command 'xclip -selection clipboard'") }, 
 	{ MODKEY|ControlMask|ShiftMask, XK_r,      spawn,          SHCMD("reboot") }, 
-    { MODKEY|ShiftMask, 		XK_Delete, spawn,          SHCMD("poweroff") }, 
+    { MODKEY|ShiftMask, 		XK_Delete, spawn,              SHCMD("poweroff") }, 
     { MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          SHCMD("systemctl suspend") }, 
 //	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
@@ -167,9 +170,11 @@ static const Key keys[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
+    { ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+    { ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+    { ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+    { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+    { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },

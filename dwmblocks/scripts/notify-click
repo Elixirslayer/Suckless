@@ -1,6 +1,0 @@
-#!/bin/bash
-echo "hey" 
-if [[ -n "$BLOCK_BUTTON" ]]; then
-    notify-send "hey"
-fi
-

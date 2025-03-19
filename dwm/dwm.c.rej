@@ -1,18 +1,40 @@
 --- dwm.c
 +++ dwm.c
-@@ -194,6 +195,7 @@ static void resizeclient(Client *c, int x, int y, int w, int h);
- static void resizemouse(const Arg *arg);
- static void restack(Monitor *m);
- static void run(void);
-+static void runautostart(void);
- static void scan(void);
- static int sendevent(Client *c, Atom proto);
- static void sendmon(Client *c, Monitor *m);
-@@ -2224,6 +2305,7 @@ main(int argc, char *argv[])
- 		die("pledge");
- #endif /* __OpenBSD__ */
- 	scan();
-+	runautostart();
- 	run();
- 	cleanup();
- 	XCloseDisplay(dpy);
+@@ -427,6 +432,7 @@ buttonpress(XEvent *e)
+ 	Client *c;
+ 	Monitor *m;
+ 	XButtonPressedEvent *ev = &e->xbutton;
++	char *text, *s, ch;
+ 
+ 	click = ClkRootWin;
+ 	/* focus monitor if necessary */
+@@ -445,9 +451,27 @@ buttonpress(XEvent *e)
+ 			arg.ui = 1 << i;
+ 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
+ 			click = ClkLtSymbol;
+-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
++		else if (ev->x > selmon->ww - statusw) {
++			x = selmon->ww - statusw;
+ 			click = ClkStatusText;
+-		else
++			statussig = 0;
++			for (text = s = stext; *s && x <= ev->x; s++) {
++				if ((unsigned char)(*s) < ' ') {
++					ch = *s;
++					*s = '\0';
++					x += TEXTW(text) - lrpad;
++					*s = ch;
++					text = s + 1;
++					if (x >= ev->x)
++						break;
++					/* reset on matching signal raw byte */
++					if (ch == statussig)
++						statussig = 0;
++					else
++						statussig = ch;
++				}
++			}
++		} else
+ 			click = ClkWinTitle;
+ 	} else if ((c = wintoclient(ev->window))) {
+ 		focus(c);
