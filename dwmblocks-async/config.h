@@ -23,7 +23,7 @@
     X("CPU: ", "/home/oc/Suckless/dwmblocks-async/scripts/cpu_usage", 2, 0)  \
     X("GPU: ", "/home/oc/Suckless/dwmblocks-async/scripts/GPU", 2, 0)  \
     X("", "/home/oc/Suckless/dwmblocks-async/scripts/volume", 0, 10)  \
-    X("", "/home/oc/Suckless/dwmblocks-async/scripts/disk_free", 15, 2)  \
+    X("", "/home/oc/Suckless/dwmblocks-async/scripts/disk_free", 15, 3)  \
     X("Ram:", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed 's/i//g'", 2, 0)  \
     X("", "date '+%b %d (%a) %I:%M%p'", 5, 0)  
 #endif  // CONFIG_H

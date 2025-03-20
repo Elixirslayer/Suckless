@@ -45,8 +45,7 @@ static const Rule rules[] = {
 	{ "LibreWold",     NULL,       NULL,       1 << 0,            0,           -1 },
 	{ "Spotify",     NULL,       NULL,       1 << 7,            0,           -1 },
 	{ "YouTube Music",     NULL,       NULL,       1 << 7,            0,           -1 },
-    { "st",       NULL,       "Polyphia",  1 << 7,       0,           -1 },
-    { "st",       NULL,       "Harry_Potter", 1 << 7,       0,           -1 },
+    { "st",       NULL,       "termusic", 1 << 7,       0,           -1 },
     { "vlc",     NULL,       NULL,       1 << 7,            0,           -1 },
 	{ "KeePassXC",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "Galculator",  NULL,       NULL,       0,       1,           -1 },
@@ -84,7 +83,6 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -95,7 +93,11 @@ static const Key keys[] = {
     { Mod4Mask|ShiftMask,                     XK_f,      spawn,          SHCMD("firefox-nightly") }, 
     { Mod4Mask,                     XK_f,      spawn,          SHCMD("librewolf") }, 
     { MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("pcmanfm") }, 
-	{ 0,    	                    XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-selection.zsh", NULL}} },
+    { MODKEY,                       XK_c,      spawn,          {.v = (const char*[]){ "/home/oc/Scripts/clip.sh", "add", NULL } } },
+    { MODKEY|ShiftMask,             XK_v,      spawn,          {.v = (const char*[]){ "/home/oc/Scripts/clip.sh", "sel", NULL } } },
+    { MODKEY|ControlMask,           XK_p,      spawn,          {.v = (const char*[]){ "/home/oc/Scripts/clip.sh", "pin", NULL } } },
+    { MODKEY|ControlMask|ShiftMask, XK_p,      spawn,          {.v = (const char*[]){ "/home/oc/Scripts/clip.sh", "unpin", NULL } } },
+    { 0,    	                    XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-selection.zsh", NULL}} },
     { Mod4Mask,                     XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-full.zsh", NULL}} }, 
     { Mod4Mask,                     XK_c,  spawn,              SHCMD("/home/oc/Scripts/clip.sh add") }, 
     { Mod4Mask,                     XK_v,  spawn,              SHCMD("/home/oc/Scripts/clip.sh sel") }, 
@@ -160,14 +162,6 @@ static const Key keys[] = {
     /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
     static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-    //{ ClkWinTitle,          0,              Button2,        zoom, {0} },
-    //{ ClkStatusText,        0,              Button1,        sigdwmblocks, {.i = 1} },
-    //{ ClkStatusText,        0,              Button2,        sigdwmblocks, {.i = 2} },
-    //{ ClkStatusText,        0,              Button3,        sigdwmblocks, {.i = 3} },
-    //{ ClkStatusText,        0,              Button4,        sigdwmblocks, {.i = 4} },
-    //{ ClkStatusText,        0,              Button5,        sigdwmblocks, {.i = 5} },
-    //{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks, {.i = 6} },
-    //{ ClkStatusText,        ShiftMask,      Button3,        spawn, SHCMD("st -e") },
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
