@@ -29,9 +29,9 @@ SPACE=$(df -h "$CURRENT_DISK" | awk 'NR==2 {print $4}')
 # If middle-clicked, change format
 # Modulo used to wrap around when it reaches end of disks array or format #s
 case $BLOCK_BUTTON in
-		1) echo "$(( ($INDEX + 1) % ${#DISKS[@]} )) $FORMAT" > "$DISKS_FILE" ;;
-		3) echo "$(( ($INDEX - 1) % ${#DISKS[@]} )) $FORMAT" > "$DISKS_FILE" ;;
-		2) echo "$INDEX $(( ($FORMAT + 1) % 2 ))" > "$DISKS_FILE" ;;
+		1) echo "$(( ($INDEX + 1) % ${#DISKS[@]} )) $FORMAT" > "$DISKS_FILE"; pkill -RTMIN+3 dwmblocks ;;
+		3) echo "$(( ($INDEX - 1) % ${#DISKS[@]} )) $FORMAT" > "$DISKS_FILE"; pkill -RTMIN+3 dwmblocks;;
+		2) echo "$INDEX $(( ($FORMAT + 1) % 2 ))" > "$DISKS_FILE"; pkill -RTMIN+3 dwmblocks ;;
 		6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 

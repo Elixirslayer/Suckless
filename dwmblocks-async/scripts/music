@@ -2,8 +2,6 @@
 
 pidof -x playerctl-loop >/dev/null 2>&1 || playerctl-loop >/dev/null 2>&1 &
 
-TERMINAL=st
-EDITOR=vim
 MUSIC=termusic
 BROWSER=firefox
 
@@ -14,12 +12,12 @@ MUSIC_STATUS=$(2>/dev/null playerctl --player=$MUSIC status)
 
 if [[ $BROWSER_STATUS == "Playing" ]]; then
     PLAYER=$BROWSER
-    ICON=" "
-    NORMAL=$(playerctl metadata --player=$PLAYER --format '{{ trunc(artist,24) }} - {{ trunc(title,26) }}')
+    ICON="🦊 "
+    NORMAL=$(playerctl metadata --player=$PLAYER --format '{{ trunc(title,25) }}')
     ALTERNATE=$(playerctl metadata --player=$PLAYER --format '{{ trunc(artist,17) }} - {{ trunc(title,17) }}')
 else
     PLAYER=$MUSIC
-    NORMAL=$(playerctl metadata --player=$PLAYER --format '{{ trunc(artist,24) }} - {{ trunc(title,26) }}')
+    NORMAL=$(playerctl metadata --player=$PLAYER --format '{{ trunc(artist,17) }} - {{ trunc(title,17) }}')
     ALTERNATE=$(playerctl metadata --player=$PLAYER --format '{{ trunc(album,17) }} - {{ trunc(title,17) }}')
 fi
 
@@ -29,15 +27,14 @@ FORMAT_FILE="/tmp/dwmblocks_mus_format"
 read FORMAT < "$FORMAT_FILE"
 
 case $BLOCK_BUTTON in
-    1) echo "$(( ($FORMAT + 1) % 2 ))" > "$FORMAT_FILE" ;;
-    2) playerctl --player=$PLAYER play-pause; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
-    3) setsid -w -f "$TERMINAL" -e pulsemixer; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
-    4) playerctl --player=$PLAYER volume 0.05+ ;;
-    5) playerctl --player=$PLAYER volume 0.05- ;;
-    6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+		1) echo "$(( ($FORMAT + 1) % 2 ))" > "$FORMAT_FILE" ;;
+		2) playerctl --player=$PLAYER play-pause; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
+		3) setsid -w -f "$TERMINAL" -e pulsemixer; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
+		4) playerctl --player=$PLAYER volume 0.05+ ;;
+		5) playerctl --player=$PLAYER volume 0.05- ;;
+		6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
 [ "$FORMAT" -eq 0 ] && INFO="$NORMAL" || INFO="$ALTERNATE"
 
 echo -e "$ICON$INFO"
-
