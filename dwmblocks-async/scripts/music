@@ -27,9 +27,9 @@ FORMAT_FILE="/tmp/dwmblocks_mus_format"
 read FORMAT < "$FORMAT_FILE"
 
 case $BLOCK_BUTTON in
-		1) echo "$(( ($FORMAT + 1) % 2 ))" > "$FORMAT_FILE" ;;
-		2) playerctl --player=$PLAYER play-pause; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
-		3) setsid -w -f "$TERMINAL" -e pulsemixer; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
+		1) echo "$(( ($FORMAT + 1) % 2 ))" > "$FORMAT_FILE"; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
+		2) playerctl --player=$PLAYER play-pause ;;
+		3) setsid -w -f "$TERMINAL" -e pulsemixer ;;
 		4) playerctl --player=$PLAYER volume 0.05+ ;;
 		5) playerctl --player=$PLAYER volume 0.05- ;;
 		6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
