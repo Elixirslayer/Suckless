@@ -1,40 +1,14 @@
---- dwm.c
-+++ dwm.c
-@@ -427,6 +432,7 @@ buttonpress(XEvent *e)
- 	Client *c;
- 	Monitor *m;
- 	XButtonPressedEvent *ev = &e->xbutton;
-+	char *text, *s, ch;
- 
- 	click = ClkRootWin;
- 	/* focus monitor if necessary */
-@@ -445,9 +451,27 @@ buttonpress(XEvent *e)
- 			arg.ui = 1 << i;
- 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
- 			click = ClkLtSymbol;
--		else if (ev->x > selmon->ww - (int)TEXTW(stext))
-+		else if (ev->x > selmon->ww - statusw) {
-+			x = selmon->ww - statusw;
- 			click = ClkStatusText;
--		else
-+			statussig = 0;
-+			for (text = s = stext; *s && x <= ev->x; s++) {
-+				if ((unsigned char)(*s) < ' ') {
-+					ch = *s;
-+					*s = '\0';
-+					x += TEXTW(text) - lrpad;
-+					*s = ch;
-+					text = s + 1;
-+					if (x >= ev->x)
-+						break;
-+					/* reset on matching signal raw byte */
-+					if (ch == statussig)
-+						statussig = 0;
-+					else
-+						statussig = ch;
-+				}
-+			}
-+		} else
- 			click = ClkWinTitle;
- 	} else if ((c = wintoclient(ev->window))) {
- 		focus(c);
+--- dwm.c	2020-03-01 19:10:06.680155097 +1300
++++ dwm.c	2020-03-01 19:28:26.793564016 +1300
+@@ -1291,7 +1301,10 @@
+ 	c->oldy = c->y; c->y = wc.y = y;
+ 	c->oldw = c->w; c->w = wc.width = w;
+ 	c->oldh = c->h; c->h = wc.height = h;
+-	wc.border_width = c->bw;
++	if (c->isfloating)
++		wc.border_width = c->floatborderpx;
++	else
++		wc.border_width = c->bw;
+ 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
+ 	configure(c);
+ 	XSync(dpy, False);

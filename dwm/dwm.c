@@ -96,6 +96,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+	int floatborderpx;
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -146,6 +147,8 @@ typedef struct {
 	unsigned int tags;
 	int isfloating;
 	int monitor;
+	int floatx, floaty, floatw, floath;
+	int floatborderpx;
 } Rule;
 
 /* function declarations */
@@ -332,6 +335,13 @@ applyrules(Client *c)
 		{
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
+			c->floatborderpx = r->floatborderpx;
+			if (r->isfloating) {
+				c->x = r->floatx;
+				c->y = r->floaty;
+				c->w = r->floatw;
+				c->h = r->floath;
+			}
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
 				c->mon = m;
@@ -1278,9 +1288,12 @@ manage(Window w, XWindowAttributes *wa)
 	c->y = MAX(c->y, c->mon->wy);
 	c->bw = borderpx;
 
-	wc.border_width = c->bw;
-	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-	XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
+    if (c->isfloating)
+        wc.border_width = c->floatborderpx;
+    else
+        wc.border_width = c->bw;
+    XConfigureWindow(dpy, w, CWBorderWidth, &wc);
+    XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
 	configure(c); /* propagates border_width, if size doesn't change */
 	updatewindowtype(c);
 	updatesizehints(c);

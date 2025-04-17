@@ -42,15 +42,13 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "firefox-nightly",     NULL,       NULL,       1 << 0,            0,           -1 },
-	{ "LibreWolf",     NULL,       NULL,       1 << 0,            0,           -1 },
-	{ "discord",     NULL,       NULL,       1 << 6,            0,           -1 },
+	{ "LibreWold",     NULL,       NULL,       1 << 0,            0,           -1 },
 	{ "Spotify",     NULL,       NULL,       1 << 7,            0,           -1 },
 	{ "YouTube Music",     NULL,       NULL,       1 << 7,            0,           -1 },
     { "st",       NULL,       "termusic", 1 << 7,       0,           -1 },
     { "vlc",     NULL,       NULL,       1 << 7,            0,           -1 },
 	{ "KeePassXC",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "Galculator",  NULL,       NULL,       0,       1,           -1 },
-	{ "mpv",  NULL,       NULL,       0,       1,           -1 },
 	{ "copyq",  NULL,       NULL,       0,       1,           -1 },
 };
 
@@ -103,12 +101,10 @@ static const Key keys[] = {
     { Mod4Mask,                     XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-full.zsh", NULL}} }, 
     { Mod4Mask,                     XK_c,  spawn,              SHCMD("/home/oc/Scripts/clip.sh add") }, 
     { Mod4Mask,                     XK_v,  spawn,              SHCMD("/home/oc/Scripts/clip.sh sel") }, 
-    { Mod4Mask,                     XK_d,  spawn,              SHCMD("/home/oc/Scripts/dictionary.zsh") }, 
     { Mod4Mask,                     XK_e,     spawn,           SHCMD("rofi -modi emoji -show emoji") }, 
     { Mod4Mask,                     XK_c,     spawn,           SHCMD("copyq") }, 
     { Mod4Mask,                     XK_s,     spawn,           SHCMD("unipicker --command 'rofi -dmenu' --copy-command 'xclip -selection clipboard'") }, 
-    { Mod4Mask,                     XK_n,       spawn,          SHCMD("/home/oc/Scripts/note") },
-    { MODKEY|ControlMask|ShiftMask, XK_r,      spawn,          SHCMD("reboot") }, 
+	{ MODKEY|ControlMask|ShiftMask, XK_r,      spawn,          SHCMD("reboot") }, 
     { MODKEY|ShiftMask, 		XK_Delete, spawn,              SHCMD("poweroff") }, 
     { MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          SHCMD("systemctl suspend") }, 
 //	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -139,7 +135,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
-    { Mod4Mask|ShiftMask,                       XK_h,      show,           {0} },
+    { Mod4Mask,                       XK_s,      show,           {0} },
     { Mod4Mask|ShiftMask,             XK_s,      showall,        {0} },
     { Mod4Mask,                       XK_h,      hide,           {0} },
     TAGKEYS(                        XK_1,                      0)

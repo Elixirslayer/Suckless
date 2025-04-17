@@ -5,8 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Monospace:pixelsize=14:antialias=true:autohint=true";
-static int borderpx = 0;
+//static char *font = "JetBrainsMono Nerd Font:size=12";
+static char *font = "Iosevka Nerd Font:size=12";
+// static char *font = "Monospace:pixelsize=14:antialias=true:autohint=true";
+static int borderpx = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -16,7 +18,7 @@ static int borderpx = 0;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/zsh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
