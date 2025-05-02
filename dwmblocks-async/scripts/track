@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+TMP="$HOME/Suckless/dwmblocks-async/scripts/track-tmp"
+
+# ensure file exists
+if [[ ! -f $TMP ]]; then
+  echo -3 > $TMP
+fi
+
+# handle click events (BUTTON is set by dwmblocks)
+case "$BLOCK_BUTTON" in
+  1)  # left-click: +1
+    (( val = $(<"$TMP") + 1 ))
+    echo $val > "$TMP"
+    ;;
+  2)  # middle-click: reset to -3
+    echo -3 > "$TMP"
+    ;;
+  3)  # right-click: -1
+    (( val = $(<"$TMP") - 1 ))
+    echo $val > "$TMP"
+    ;;
+esac
+
+# output current value
+cat "$TMP"
+

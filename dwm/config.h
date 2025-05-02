@@ -42,6 +42,7 @@ static const Rule rules[] = {
      */
     /* class           instance    title       tags mask  isfloating  monitor  floatx  floaty  floatw  floath  floatborderpx */
     { "firefox-nightly", NULL,     NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
+    { "qutebrowser", NULL,     NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "LibreWolf",       NULL,     NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "discord",         NULL,     NULL,       1 << 6,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "Spotify",         NULL,     NULL,       1 << 7,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
