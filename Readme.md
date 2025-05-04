@@ -1,3 +1,5 @@
+This is my Archlinux setup with Xorg and DWM.
+
 **Prerequisites:**
 Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi
 
