@@ -32,6 +32,6 @@ Write "exec dwm" in it, without quotes.
 ```
    startx
 ```
-
-   You also need to setup a wallpaper by editting $HOME/.dwm/autostart.sh
+Refer to [Automatic login to virtual console](https://wiki.archlinux.org/title/Getty#Automatic_login_to_virtual_console)and [Autostart X at login](https://wiki.archlinux.org/title/Xinit#Override_xinitrc), if you'd rather not login and type in startx command everytime you boot. 
+   You may also want to setup a wallpaper by editting $HOME/.dwm/autostart.sh
 
