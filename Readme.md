@@ -49,7 +49,7 @@ ModKey + num key (1..0) -> Switch to a "tag" or "Desktop" with the corresponding
 ModKey + p -> Open dmenu (application launcher)
 ModKey + space -> Switch b/w floating mode/tiled mode
 PrtSc -> Take selection screenshot (Also saves it to ~/Screenshots and copies to xclip)
-Mod4Key -> Take full screenshot (Also saves it to ~/Screenshots and copies to xclip)
+Mod4Key + PrtSc -> Take full screenshot (Also saves it to ~/Screenshots and copies to xclip)
 ModKey -> Close window
 Mod4Key -> Hide window (Can also click the window title in the status bar to hide/unhide it)
 Mod4Key + R_Shift + S -> show all windows
