@@ -5,7 +5,7 @@ Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim
 
 With pacman, these can be installed with:
 ``` 
-sudo pacman -S git make curl base-devel dunst libnotify rofi xclip maim
+sudo pacman -S git make curl base-devel dunst libnotify rofi xclip maim --needed
 ```
  **Installation:**
  ```
