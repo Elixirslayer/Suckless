@@ -40,12 +40,16 @@ Refer to [Automatic login to virtual console](https://wiki.archlinux.org/title/G
 
 **Keybinding:**
 You can check out all the keybindings and modify them in Suckless/dwm/config.h
+
 Alt key is the "ModKey" by default.
+
 Super/Windows key is "Mod4Key"
+
 Basic keybindings:
 ```
 ModKey + Shift + Return -> Open St (suckless terminal)
 ModKey + num key (1..0) -> Switch to a "tag" or "Desktop" with the corresponding number
+ModKey + Shift + num key (1..0) -> Move window to a "tag" or "Desktop" with the corresponding number
 ModKey + p -> Open dmenu (application launcher)
 ModKey + space -> Switch b/w floating mode/tiled mode
 PrtSc -> Take selection screenshot (Also saves it to ~/Screenshots and copies to xclip)
