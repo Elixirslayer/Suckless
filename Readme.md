@@ -1,11 +1,11 @@
 This is my Archlinux setup with Xorg and DWM.
 
 **Prerequisites:**
-Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi
+Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim
 
 With pacman, these can be installed with:
 ``` 
-sudo pacman -S git make curl base-devel dunst libnotify rofi
+sudo pacman -S git make curl base-devel dunst libnotify rofi xclip maim
 ```
  **Installation:**
  ```
