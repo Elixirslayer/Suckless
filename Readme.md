@@ -1,11 +1,12 @@
 This is my Archlinux setup with Xorg and DWM.
 
 **Prerequisites:**
-Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim
+Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts
+
 
 With pacman, these can be installed with:
 ``` 
-sudo pacman -S git make curl base-devel dunst libnotify rofi xclip maim --needed
+sudo pacman -S git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols maim --needed
 ```
  **Installation:**
  ```
