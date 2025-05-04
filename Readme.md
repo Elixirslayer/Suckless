@@ -1,12 +1,12 @@
 This is my Archlinux setup with Xorg and DWM.
 
 **Prerequisites:**
-Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts
+Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts, Xserver
 
 
 With pacman, these can be installed with:
 ``` 
-sudo pacman -S git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols maim --needed
+sudo pacman -S xorg-xserver xorg-startx git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols maim --needed
 ```
  **Installation:**
  ```
@@ -25,10 +25,8 @@ You can execute dwm by any of your preferred method, such as with gdm, startx or
  If using gdm dwm entry should appear in switch DE menu in the login screen.
 
  If using bare minimum config, i.e., startx:
-
 ```
-  sudo pacman -S xorg-startx xorg-xserver --needed
-  vim ~/.xinitrc
+  sudo vim ~/.xinitrc
 ```
 Write "exec dwm" in it, without quotes.
   Now login to tty shell and execute the following command:
