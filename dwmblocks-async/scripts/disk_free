@@ -2,7 +2,7 @@
 
 # Array of disks and matching icons
 DISKS=("/mnt/HDD" "/home")
-ICONS=("  " " 󰣇 ")
+ICONS=("   " " 󰣇 ")
 
 # Define a file to save current disk and format, and initialize if not found
 DISKS_FILE="/tmp/dwmblocks_disk_info"
