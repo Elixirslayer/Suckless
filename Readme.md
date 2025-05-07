@@ -1,11 +1,11 @@
 This is my Archlinux setup with Xorg and DWM.
 
 **Prerequisites:**
-Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts, Xserver, playerctl, feh
+Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts, Xserver, xinit playerctl, feh
 
 With pacman, these can be installed with:
 ``` 
-sudo pacman -S xorg-xserver xorg-startx git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim --needed
+sudo pacman -S xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim --needed
 ```
  **Installation:**
  ```
@@ -15,7 +15,9 @@ sudo pacman -S xorg-xserver xorg-startx git make curl base-devel dunst libnotify
  sudo chmod +x Suckless/dwmblocks-async/scripts/*
  cd Suckless
  cd dwm && sudo make clean install && cd ..
- cd dwmblocks-async && sudo make install && cd ..
+ cd dwmblocks-async && sudo make install
+ cd netspeed && sudo make install && cd ..
+ sudo chmod +x netspeed && cd ..
  cd dmenu && sudo make install && cd ..
  cd st && sudo make install && cd
  curl --create-dirs -L -o $HOME/.dwm/autostart.sh https://raw.githubusercontent.com/Elixirslayer/Scripts/refs/heads/master/autostart.sh
