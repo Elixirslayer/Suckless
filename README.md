@@ -6,7 +6,7 @@ git clone https://github.com/Elixirslayer/Suckless.git
 cd Suckless
 make menu
 ```
-make menu
+make menu "\n"
 make install_packages
 make clone_build
 make create_xinitrc
