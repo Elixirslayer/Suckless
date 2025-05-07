@@ -1,14 +1,29 @@
 This is my Archlinux setup with Xorg and DWM.
+It can be installed using make, note that the Makefile assumes you're using zsh, if not then please edit the $HOME/Suckess/Makefile
+```
+git clone https://github.com/Elixirslayer/Suckless.git
+cd Suckless
+make menu
+```
+make menu                  # Asks for input
+make install_packages      # Installs all required packages using pacman
+make clone_build           # Clones and builds suckless programs and scripts
+make create_xinitrc        # Writes 'exec dwm' to ~/.xinitrc
+make enable_autologin      # Enables auto-login on tty1 using systemd
+make enable_autostart_x    # Adds logic to ~/.zprofile to auto-start X at login
+make all                   # Runs all of the above steps in order
 
-**Prerequisites:**
+Targets can be separted by comma.
+**Installation:**
+Prerequisites:
 Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts, Xserver, xinit playerctl, feh
 
 With pacman, these can be installed with:
 ``` 
 sudo pacman -S xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim --needed
 ```
- **Installation:**
- ```
+Installation:
+```
  git clone github.com/Elixirslayer/Suckless.git
  git clone github.com/Elixirslayer/Scripts.git
  sudo chmod +x Scripts/*
