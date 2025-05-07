@@ -13,22 +13,25 @@ menu:
 	@echo "4) Enable auto-login on tty1"
 	@echo "5) Enable auto-start X at login (Zsh)"
 	@echo "0) All of the above"
-	@read "opt?Enter option: "; \
-	case $$opt in \
-		1) $(MAKE) install_packages ;; \
-		2) $(MAKE) clone_build ;; \
-		3) $(MAKE) create_xinitrc ;; \
-		4) $(MAKE) enable_autologin ;; \
-		5) $(MAKE) enable_autostart_x ;; \
-		0) $(MAKE) all ;; \
-		*) echo "Invalid option" ;; \
-	esac
+	@read "opt?Enter option(s) (comma-separated): "; \
+	IFS=',' read -A opts <<< "$$opt"; \
+	for o in "$${opts[@]}"; do \
+		case "$$o" in \
+			1) $(MAKE) install_packages ;; \
+			2) $(MAKE) clone_build ;; \
+			3) $(MAKE) create_xinitrc ;; \
+			4) $(MAKE) enable_autologin ;; \
+			5) $(MAKE) enable_autostart_x ;; \
+			0) $(MAKE) all ;; \
+			*) echo "Invalid option: $$o" ;; \
+		esac; \
+	done
 
 install_packages:
 	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim
 
 clone_build:
-	git clone https://github.com/Elixirslayer/Suckless.git
+	cd $HOME
 	git clone https://github.com/Elixirslayer/Scripts.git
 	sudo chmod +x Scripts/*
 	sudo chmod +x Suckless/dwmblocks-async/scripts/*
