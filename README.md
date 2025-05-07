@@ -1,5 +1,6 @@
 This is my Archlinux setup with Xorg and DWM.
-
+![Screenshot-1](images/screenshot-2025-05-07-16-58.png)
+![Screenshot-2](images/screenshot-2025-05-07-16-59.png)
 It can be installed using make, note that the Makefile assumes you're using zsh, if not then please edit the $HOME/Suckless/Makefile
 ```
 git clone https://github.com/Elixirslayer/Suckless.git
