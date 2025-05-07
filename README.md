@@ -40,11 +40,22 @@ Installation:
  curl --create-dirs -L -o $HOME/.dwm/autostart.sh https://raw.githubusercontent.com/Elixirslayer/Scripts/refs/heads/master/autostart.sh
 sudo chmod +x $HOME/.dwm/autostart.sh
 ```
-You can execute dwm by any of your preferred method, such as with gdm, startx or any login manager.
+ If you're using any login manager such as gdm, you will need to create a desktop entry for it and make it executable.
+ ```
+sudo vim /usr/share/xsessions/dwm.desktop
+sudo chmod +x /usr/share/xsessions/dwm.desktop
+ ```
+and place the following content in it:
+```
+[Desktop Entry]
+Type=XSession
+Name=dwm
+Comment=Dynamic window manager
+Exec=/home/oc/Suckless/dwm/dwm
+```
+**NOTE: Replace "username" with your actual username**
 
- If using gdm dwm entry should appear in switch DE menu in the login screen.
-
- If using bare minimum config, i.e., startx:
+If you're using bare minimum config, i.e., startx:
 ```
   sudo vim ~/.xinitrc
 ```
