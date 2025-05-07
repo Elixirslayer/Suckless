@@ -6,13 +6,13 @@ git clone https://github.com/Elixirslayer/Suckless.git
 cd Suckless
 make menu
 ```
-make menu "\n"
-make install_packages
-make clone_build
-make create_xinitrc
-make enable_autologin
-make enable_autostart_x
-make all
+make menu  
+make install_packages  
+make clone_build  
+make create_xinitrc  
+make enable_autologin  
+make enable_autostart_x  
+make all  
 
 Targets can be separted by comma.
 
