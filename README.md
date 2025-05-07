@@ -7,11 +7,17 @@ cd Suckless
 make menu
 ```
 make menu                  # Asks for input
+
 make install_packages      # Installs all required packages using pacman
+
 make clone_build           # Clones and builds suckless programs and scripts
+
 make create_xinitrc        # Writes 'exec dwm' to ~/.xinitrc
+
 make enable_autologin      # Enables auto-login on tty1 using systemd
+
 make enable_autostart_x    # Adds logic to ~/.zprofile to auto-start X at login
+
 make all                   # Runs all of the above steps in order
 
 Targets can be separted by comma.
