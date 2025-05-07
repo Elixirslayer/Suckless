@@ -31,17 +31,15 @@ install_packages:
 	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim
 
 clone_build:
-	cd $$HOME
-	git clone https://github.com/Elixirslayer/Scripts.git
-	sudo chmod +x Scripts/*
-	sudo chmod +x Suckless/dwmblocks-async/scripts/*
-	cd Suckless
-	cd dwm && sudo make clean install && cd ..
-	cd dwmblocks-async && sudo make install
-	cd netspeed && sudo make install && cd ..
-	sudo chmod +x netspeed
-	cd dmenu && sudo make install && cd ..
-	cd st && sudo make install && cd ..
+	git clone https://github.com/Elixirslayer/Scripts.git $$HOME/Scripts
+	sudo chmod +x $$HOME/Scripts/*
+	sudo chmod +x dwmblocks-async/scripts/*
+	sudo make -C dwm/ clean install
+	sudo make -C dwmblocks-async/ install
+	sudo make -C dwmblocks-async/netspeed/ install
+	sudo chmod +x dwmblocks-async/netspeed
+	sudo make -C st/ install
+	sudo make -C dmenu/ install
 	curl --create-dirs -L -o $$HOME/.dwm/autostart.sh https://raw.githubusercontent.com/Elixirslayer/Scripts/refs/heads/master/autostart.sh
 	sudo chmod +x $$HOME/.dwm/autostart.sh
 
