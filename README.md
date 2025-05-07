@@ -27,7 +27,7 @@ and place the following content in it:
 Type=XSession
 Name=dwm
 Comment=Dynamic window manager
-Exec=/home/oc/Suckless/dwm/dwm
+Exec=/home/username/Suckless/dwm/dwm
 ```
 **NOTE: Replace "username" with your actual username**
 
