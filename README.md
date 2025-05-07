@@ -1,6 +1,6 @@
 This is my Archlinux setup with Xorg and DWM.
 
-It can be installed using make, note that the Makefile assumes you're using zsh, if not then please edit the $HOME/Suckess/Makefile
+It can be installed using make, note that the Makefile assumes you're using zsh, if not then please edit the $HOME/Suckless/Makefile
 ```
 git clone https://github.com/Elixirslayer/Suckless.git
 cd Suckless
@@ -16,31 +16,7 @@ make all
 
 Targets can be separted by comma.
 
-**Manual Installation:**
-Prerequisites:
-Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts, Xserver, xinit playerctl, feh
-
-With pacman, these can be installed with:
-``` 
-sudo pacman -S xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim --needed
-```
-Installation:
-```
- git clone github.com/Elixirslayer/Suckless.git
- git clone github.com/Elixirslayer/Scripts.git
- sudo chmod +x Scripts/*
- sudo chmod +x Suckless/dwmblocks-async/scripts/*
- cd Suckless
- cd dwm && sudo make clean install && cd ..
- cd dwmblocks-async && sudo make install
- cd netspeed && sudo make install && cd ..
- sudo chmod +x netspeed && cd ..
- cd dmenu && sudo make install && cd ..
- cd st && sudo make install && cd
- curl --create-dirs -L -o $HOME/.dwm/autostart.sh https://raw.githubusercontent.com/Elixirslayer/Scripts/refs/heads/master/autostart.sh
-sudo chmod +x $HOME/.dwm/autostart.sh
-```
- If you're using any login manager such as gdm, you will need to create a desktop entry for it and make it executable.
+If you're using any login manager such as gdm, you will need to create a desktop entry for it and make it executable.
  ```
 sudo vim /usr/share/xsessions/dwm.desktop
 sudo chmod +x /usr/share/xsessions/dwm.desktop
@@ -64,17 +40,14 @@ Write "exec dwm" in it, without quotes.
 ```
    startx
 ```
-Refer to [Automatic login to virtual console](https://wiki.archlinux.org/title/Getty#Automatic_login_to_virtual_console)and [Autostart X at login](https://wiki.archlinux.org/title/Xinit#Override_xinitrc), if you'd rather not login and type in startx command everytime you boot. 
-   You may also want to setup a wallpaper by editting $HOME/.dwm/autostart.sh
+Refer to [Automatic login to virtual console](https://wiki.archlinux.org/title/Getty#Automatic_login_to_virtual_console) and [Autostart X at login](https://wiki.archlinux.org/title/Xinit#Override_xinitrc), if you'd rather not login and type in startx command everytime you boot.  
+You may also want to setup a wallpaper by editting $HOME/.dwm/autostart.sh
 
 
 **Keybinding:**
 You can check out all the keybindings and modify them in Suckless/dwm/config.h
-
-Alt key is the "ModKey" by default.
-
-Super/Windows key is "Mod4Key"
-
+Alt key is the "ModKey" by default.  
+Super/Windows key is "Mod4Key"  
 Basic keybindings:
 ```
 ModKey + Shift + Return -> Open St (suckless terminal)
