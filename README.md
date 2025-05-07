@@ -6,19 +6,13 @@ git clone https://github.com/Elixirslayer/Suckless.git
 cd Suckless
 make menu
 ```
-make menu                  # Asks for input
-
-make install_packages      # Installs all required packages using pacman
-
-make clone_build           # Clones and builds suckless programs and scripts
-
-make create_xinitrc        # Writes 'exec dwm' to ~/.xinitrc
-
-make enable_autologin      # Enables auto-login on tty1 using systemd
-
-make enable_autostart_x    # Adds logic to ~/.zprofile to auto-start X at login
-
-make all                   # Runs all of the above steps in order
+make menu
+make install_packages
+make clone_build
+make create_xinitrc
+make enable_autologin
+make enable_autostart_x
+make all
 
 Targets can be separted by comma.
 
