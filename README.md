@@ -1,7 +1,5 @@
 This is my Archlinux setup with Xorg and DWM.
 
-**Currently make file doesn't work pls use Manual Installation.**
-
 It can be installed using make, note that the Makefile assumes you're using zsh, if not then please edit the $HOME/Suckess/Makefile
 ```
 git clone https://github.com/Elixirslayer/Suckless.git
