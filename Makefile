@@ -31,7 +31,7 @@ install_packages:
 	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim
 
 clone_build:
-	cd $HOME
+	cd $$HOME
 	git clone https://github.com/Elixirslayer/Scripts.git
 	sudo chmod +x Scripts/*
 	sudo chmod +x Suckless/dwmblocks-async/scripts/*

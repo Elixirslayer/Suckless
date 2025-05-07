@@ -1,4 +1,7 @@
 This is my Archlinux setup with Xorg and DWM.
+
+**Currently make file doesn't work pls use Manual Installation.**
+
 It can be installed using make, note that the Makefile assumes you're using zsh, if not then please edit the $HOME/Suckess/Makefile
 ```
 git clone https://github.com/Elixirslayer/Suckless.git
@@ -14,7 +17,8 @@ make enable_autostart_x    # Adds logic to ~/.zprofile to auto-start X at login
 make all                   # Runs all of the above steps in order
 
 Targets can be separted by comma.
-**Installation:**
+
+**Manual Installation:**
 Prerequisites:
 Git, Make, Curl, Arch base-devel, dunst, libnotify, Rofi, xclip, maim, noto-fonts, noto-fonts-cjk, noto-fonts-emoji, nerd symbol fonts, Xserver, xinit playerctl, feh
 
