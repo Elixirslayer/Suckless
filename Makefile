@@ -35,12 +35,12 @@ clone_build:
 	git clone https://github.com/Elixirslayer/Scripts.git
 	sudo chmod +x Scripts/*
 	sudo chmod +x Suckless/dwmblocks-async/scripts/*
-	cd Suckless && \
-	cd dwm && sudo make clean install && cd .. && \
-	cd dwmblocks-async && sudo make install && \
-	cd netspeed && sudo make install && cd .. && \
-	sudo chmod +x netspeed && \
-	cd dmenu && sudo make install && cd .. && \
+	cd Suckless
+	cd dwm && sudo make clean install && cd ..
+	cd dwmblocks-async && sudo make install
+	cd netspeed && sudo make install && cd ..
+	sudo chmod +x netspeed
+	cd dmenu && sudo make install && cd ..
 	cd st && sudo make install && cd ..
 	curl --create-dirs -L -o $$HOME/.dwm/autostart.sh https://raw.githubusercontent.com/Elixirslayer/Scripts/refs/heads/master/autostart.sh
 	sudo chmod +x $$HOME/.dwm/autostart.sh
