@@ -28,7 +28,7 @@ menu:
 	done
 
 install_packages:
-	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim picom
+	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dict dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim picom
 
 clone_build:
 	git clone https://github.com/Elixirslayer/Scripts.git $$HOME/Scripts
