@@ -28,7 +28,7 @@ menu:
 	done
 
 install_packages:
-	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim
+	sudo pacman -S --needed xorg-server xorg-xinit git make curl base-devel dunst libnotify rofi xclip noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols feh playerctl maim picom
 
 clone_build:
 	git clone https://github.com/Elixirslayer/Scripts.git $$HOME/Scripts
@@ -50,7 +50,7 @@ enable_autologin:
 	sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 	echo "[Service]" | sudo tee /etc/systemd/system/getty@tty1.service.d/autologin.conf > /dev/null
 	echo "ExecStart=" | sudo tee -a /etc/systemd/system/getty@tty1.service.d/autologin.conf > /dev/null
-	echo "ExecStart=-/sbin/agetty -o '-p -f -- \\\\u' --noclear --autologin $(USER_NAME) %%I \$\$TERM" | sudo tee -a /etc/systemd/system/getty@tty1.service.d/autologin.conf > /dev/null
+	echo "ExecStart=-/sbin/agetty -o '-p -f -- \\\\u' --noclear --autologin $(USER_NAME) %I $$TERM" | sudo tee -a /etc/systemd/system/getty@tty1.service.d/autologin.conf > /dev/null
 
 enable_autostart_x:
 	echo 'if [[ -z "$$DISPLAY" && "$$XDG_VTNR" == 1 ]]; then' > $$HOME/.zprofile
