@@ -164,7 +164,10 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioStop,           spawn,          SHCMD("/home/oc/Scripts/media-stop.zsh") },
     { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+10 -f 'dwmblocks'") },
     { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+10 -f 'dwmblocks'") },
-    { 0, XF86XK_AudioMute, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 -f 'dwmblocks'") }
+    { 0, XF86XK_AudioMute, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 -f 'dwmblocks'") },
+    { 0|ShiftMask, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-source-volume @DEFAULT_SOURCE@ +5% && pkill -RTMIN+10 -f 'dwmblocks'") },
+    { 0|ShiftMask, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-source-volume @DEFAULT_SOURCE@ -5% && pkill -RTMIN+10 -f 'dwmblocks'") },
+    { 0|ShiftMask, XF86XK_AudioMute,        spawn, SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 -f 'dwmblocks'") },
 };
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
