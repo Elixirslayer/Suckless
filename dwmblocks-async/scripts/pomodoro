@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+
+# Configuration
+FOCUS=25            # Focus time in minutes
+SMALL_BREAK=5       # Short break time in minutes
+LONGER_BREAK=15     # Long break time in minutes
+POMODOROS_BLB=4     # Number of pomodoros before a long break
+
+# State files
+STATE_FILE="/tmp/pomodoro_state"         # stores "phase:runstate"
+TIMER_FILE="/tmp/pomodoro_timer"         # remaining seconds
+COUNT_FILE="/tmp/pomodoro_count"         # completed short pomodoros
+LAST_UPDATE_FILE="/tmp/pomodoro_last_update"
+
+# Initialize missing files
+initialize_state() {
+    [ -f "$STATE_FILE" ]      || echo "idle:paused" > "$STATE_FILE"
+    [ -f "$TIMER_FILE" ]      || echo "0"             > "$TIMER_FILE"
+    [ -f "$COUNT_FILE" ]      || echo "0"             > "$COUNT_FILE"
+    [ -f "$LAST_UPDATE_FILE" ] || date +%s           > "$LAST_UPDATE_FILE"
+}
+
+# Load into shell vars
+load_state() {
+    raw=$(<"$STATE_FILE")
+    phase=${raw%%:*}       # idle, focus, or break
+    runstate=${raw##*:}    # running or paused
+    remaining=$(<"$TIMER_FILE")
+    pomodoros=$(<"$COUNT_FILE")
+    last_update=$(<"$LAST_UPDATE_FILE")
+}
+
+# Persist vars
+save_state() {
+    echo "${phase}:${runstate}" > "$STATE_FILE"
+    echo "$remaining"            > "$TIMER_FILE"
+    echo "$pomodoros"            > "$COUNT_FILE"
+    date +%s                     > "$LAST_UPDATE_FILE"
+}
+
+# Handle mouse clicks
+handle_click() {
+  case $BLOCK_BUTTON in
+    1)  # Left click: toggle pause/resume (only if not idle)
+      if [ "$phase" != "idle" ]; then
+        if [ "$runstate" == "running" ]; then
+          runstate="paused"
+        else
+          runstate="running"
+          date +%s > "$LAST_UPDATE_FILE"
+        fi
+      fi
+      ;;
+    2)  # Middle click: reset into a fresh focus
+      phase="focus"
+      runstate="running"
+      remaining=$((FOCUS*60))
+      pomodoros=0
+      notify-send "Pomodoro" \
+        "⏩ Starting focus! (Pomodoro $((pomodoros+1))/${POMODOROS_BLB})"
+      date +%s > "$LAST_UPDATE_FILE"
+      ;;
+    3)  # Right click: skip to next phase
+      runstate="running"
+      if [ "$phase" == "focus" ]; then
+        # focus → break
+        if [ $pomodoros -ge $((POMODOROS_BLB-1)) ]; then
+          phase="break"
+          remaining=$((LONGER_BREAK*60))
+          pomodoros=0
+          notify-send "Pomodoro" \
+            "⏩ Skipped to long break! (New cycle)"
+        else
+          phase="break"
+          remaining=$((SMALL_BREAK*60))
+          ((pomodoros++))
+          notify-send "Pomodoro" \
+            "⏩ Skipped to break! (Pomodoro ${pomodoros}/${POMODOROS_BLB})"
+        fi
+      elif [ "$phase" == "break" ]; then
+        # break → focus
+        phase="focus"
+        remaining=$((FOCUS*60))
+        notify-send "Pomodoro" \
+          "⏩ Skipped to focus! (Pomodoro $((pomodoros+1))/${POMODOROS_BLB})"
+      else
+        # idle: jump into focus
+        phase="focus"
+        remaining=$((FOCUS*60))
+        notify-send "Pomodoro" \
+          "⏩ Starting focus! (Pomodoro $((pomodoros+1))/${POMODOROS_BLB})"
+      fi
+      date +%s > "$LAST_UPDATE_FILE"
+      ;;
+  esac
+}
+
+# Advance the timer
+update_timer() {
+  now=$(date +%s)
+  elapsed=$(( now - last_update ))
+
+  if [ "$runstate" == "running" ] && [ "$phase" != "idle" ]; then
+    remaining=$(( remaining - elapsed ))
+    (( remaining < 0 )) && remaining=0
+
+    if [ $remaining -le 0 ]; then
+      # auto-transition on zero
+      if [ "$phase" == "focus" ]; then
+        if [ $pomodoros -ge $((POMODOROS_BLB-1)) ]; then
+          phase="break"
+          remaining=$((LONGER_BREAK*60))
+          pomodoros=0
+          notify-send "Pomodoro" "Long break time! (${LONGER_BREAK}m)"
+        else
+          phase="break"
+          remaining=$((SMALL_BREAK*60))
+          ((pomodoros++))
+          notify-send "Pomodoro" "Short break time! (${SMALL_BREAK}m)"
+        fi
+      else
+        phase="focus"
+        remaining=$((FOCUS*60))
+        notify-send "Pomodoro" \
+          "Focus time! (${FOCUS}m) (Pomodoro $((pomodoros+1))/${POMODOROS_BLB})"
+      fi
+      date +%s > "$LAST_UPDATE_FILE"
+    fi
+  fi
+}
+
+# Format for display
+format_time() {
+  printf "%02d:%02d" $((remaining/60)) $((remaining%60))
+}
+
+###### MAIN ######
+initialize_state
+load_state
+
+# Auto-start on first run (idle + no click)
+if [ "$phase" == "idle" ] && [ -z "$BLOCK_BUTTON" ]; then
+  phase="focus"
+  runstate="running"
+  remaining=$((FOCUS*60))
+  pomodoros=0
+  notify-send "Pomodoro" \
+    "🎬 First Pomodoro started! (Pomodoro 1/${POMODOROS_BLB})"
+  date +%s > "$LAST_UPDATE_FILE"
+fi
+
+# Handle any click
+[ -n "$BLOCK_BUTTON" ] && handle_click
+
+# Tick if in a session
+update_timer
+
+save_state
+format_time
+

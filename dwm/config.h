@@ -107,7 +107,7 @@ static const Key keys[] = {
     { Mod4Mask,                     XK_Print,  spawn,          {.v = (const char*[]){"zsh", "/home/oc/Scripts/screenshot-full.zsh", NULL}} }, 
     { Mod4Mask,                     XK_c,      spawn,          SHCMD("/home/oc/Scripts/clip.sh add") }, 
     { Mod4Mask,                     XK_v,      spawn,          SHCMD("/home/oc/Scripts/clip.sh sel") }, 
-    { Mod4Mask,                     XK_d,      spawn,          SHCMD("/home/oc/Scripts/dictionary.zsh") }, 
+    { Mod4Mask,                     XK_d,      spawn,          SHCMD("/home/oc/Scripts/dictionary") }, 
     { Mod4Mask,                     XK_e,      spawn,          SHCMD("rofi -modi emoji -show emoji") }, 
     { Mod4Mask,                     XK_c,      spawn,          SHCMD("copyq") }, 
     { Mod4Mask,                     XK_s,      spawn,          SHCMD("unipicker --command 'rofi -dmenu' --copy-command 'xclip -selection clipboard'") }, 
