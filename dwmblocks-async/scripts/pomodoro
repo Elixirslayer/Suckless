@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Configuration
-FOCUS=25            # Focus time in minutes
+FOCUS=20            # Focus time in minutes
 SMALL_BREAK=5       # Short break time in minutes
-LONGER_BREAK=15     # Long break time in minutes
-POMODOROS_BLB=4     # Number of pomodoros before a long break
+LONGER_BREAK=20     # Long break time in minutes
+POMODOROS_BLB=3     # Number of pomodoros before a long break
 
 # State files
 STATE_FILE="/tmp/pomodoro_state"         # stores "phase:runstate"

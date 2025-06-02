@@ -48,7 +48,9 @@ static const Rule rules[] = {
     { "Spotify",         NULL,     NULL,       1 << 7,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "YouTube Music",   NULL,     NULL,       1 << 7,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "st",              NULL,     "termusic", 1 << 7,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
-    { "st",              NULL,     "pulsemixer", 0,    1,          -1,      1441,     -1,     479,     291,     -1 },
+    { "st",              NULL,     "wttr.in", 0,    1,          -1,      -1,     -1,     1920,     1080,     -1 },
+    { "st",              NULL,     "pulsemixer", 0,    1,          -1,      1280,     -1,     640,     360,     -1 },
+    { "st",              NULL,     "calcurse", 0,    1,          -1,      1280,     -1,     640,     360,     -1 },
     { "vlc",             NULL,     NULL,       1 << 7,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "KeePassXC",       NULL,     NULL,       1 << 8,    0,          -1,      -1,     -1,     -1,     -1,     -1 },
     { "Galculator",      NULL,     NULL,       0,         1,          -1,      -1,     -1,     -1,     -1,     -1 },
@@ -109,6 +111,7 @@ static const Key keys[] = {
     { Mod4Mask,                     XK_v,      spawn,          SHCMD("/home/oc/Scripts/clip.sh sel") }, 
     { Mod4Mask,                     XK_d,      spawn,          SHCMD("/home/oc/Scripts/dictionary") }, 
     { Mod4Mask,                     XK_e,      spawn,          SHCMD("rofi -modi emoji -show emoji") }, 
+    
     { Mod4Mask,                     XK_c,      spawn,          SHCMD("copyq") }, 
     { Mod4Mask,                     XK_s,      spawn,          SHCMD("unipicker --command 'rofi -dmenu' --copy-command 'xclip -selection clipboard'") }, 
     { Mod4Mask,                     XK_n,      spawn,          SHCMD("/home/oc/Scripts/note") },
@@ -156,6 +159,7 @@ static const Key keys[] = {
     TAGKEYS(                        XK_8,                      7)
     TAGKEYS(                        XK_9,                      8)
     { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+    { MODKEY|ShiftMask,             XK_l,      spawn,            SHCMD("slock")},
     { 0,                            XF86XK_Tools,               spawn,          SHCMD("vlc") },
     { 0|ShiftMask,                  XF86XK_Tools,               spawn,          SHCMD("~/Suckless/dmenu/Scripts/dmenu_audioswitch") },
     { 0,                            XF86XK_AudioPlay,           spawn,          SHCMD("/home/oc/Scripts/media-play-pause.zsh") },

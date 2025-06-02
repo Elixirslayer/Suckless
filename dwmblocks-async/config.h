@@ -17,8 +17,8 @@
 #define TRAILING_DELIMITER 0
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
+//    X("  : ", "/home/oc/Suckless/dwmblocks-async/scripts/pomodoro", 1, 12)  
 #define BLOCKS(X)             \
-    X("  : ", "/home/oc/Suckless/dwmblocks-async/scripts/pomodoro", 1, 12)  \
     X("", "/home/oc/Suckless/dwmblocks-async/scripts/music", 0, 11)  \
     X("", "/home/oc/Suckless/dwmblocks-async/netspeed/netspeed", 1, 2)  \
     X("CPU: ", "/home/oc/Suckless/dwmblocks-async/scripts/cpu_usage", 2, 0)  \
