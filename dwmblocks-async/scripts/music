@@ -2,8 +2,8 @@
 
 pidof -x playerctl-loop >/dev/null 2>&1 || playerctl-loop >/dev/null 2>&1 &
 
-MUSIC=termusic
-BROWSER=chromium
+MUSIC=mpd
+BROWSER=qutebrowser
 
 BROWSER_STATUS=$(2>/dev/null playerctl --player=$BROWSER status)
 MUSIC_STATUS=$(2>/dev/null playerctl --player=$MUSIC status)
