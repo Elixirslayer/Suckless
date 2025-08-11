@@ -167,6 +167,10 @@ static const Key keys[] = {
 	{ 0|ShiftMask,              XK_F6,  spawn, SHCMD("/home/oc/Scripts/media-next.zsh") },
     { 0|ShiftMask,              XK_F7,  spawn, SHCMD("/home/oc/Scripts/media-stop.zsh") },
     { 0|ShiftMask,              XK_F8,  spawn, SHCMD("pactl set-sink-mute   @DEFAULT_SINK@ toggle && pkill -RTMIN+10 -f 'dwmblocks'") },
+	{ 0|ShiftMask|ControlMask,              XK_F2,  spawn, SHCMD("pactl set-source-volume @DEFAULT_SOURCE@ -5% && pkill -RTMIN+10 -f 'dwmblocks'") },
+	{ 0|ShiftMask|ControlMask,              XK_F3,  spawn, SHCMD("pactl set-source-volume @DEFAULT_SOURCE@ +5% && pkill -RTMIN+10 -f 'dwmblocks'") },
+    { 0|ShiftMask|ControlMask,              XK_F8,  spawn, SHCMD("pactl set-source-mute   @DEFAULT_SOURCE@ toggle && pkill -RTMIN+10 -f 'dwmblocks'") },
+
 };
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
