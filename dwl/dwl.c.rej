@@ -1,30 +1,25 @@
 --- dwl.c
 +++ dwl.c
-@@ -480,9 +489,27 @@ applyrules(Client *c)
- 				if (r->monitor == i++)
- 					mon = m;
- 			}
-+			if (c->isfloating || !mon->lt[mon->sellt]->arrange) {
-+				/* client is floating or in floating layout */
-+				struct wlr_box b = respect_monitor_reserved_area ? mon->w : mon->m;
-+				newwidth = (int)round(r->w ? (r->w <= 1 ? b.width * r->w : r->w) : c->geom.width);
-+				newheight = (int)round(r->h ? (r->h <= 1 ? b.height * r->h : r->h) : c->geom.height);
-+				newx = (int)round(r->x ? (r->x <= 1 ? b.width * r->x + b.x : r->x + b.x) : c->geom.x);
-+				newy = (int)round(r->y ? (r->y <= 1 ? b.height * r->y + b.y : r->y + b.y) : c->geom.y);
-+				apply_resize = 1;
-+
-+			}
- 		}
- 	}
- 	setmon(c, mon, newtags);
-+	if (apply_resize) {
-+		resize(c, (struct wlr_box){
-+			.x = newx,
-+			.y = newy,
-+			.width = newwidth,
-+			.height = newheight,
-+		}, 1);
-+	}
- }
- 
+@@ -2714,7 +2727,7 @@ tagmon(const Arg *arg)
  void
+ tile(Monitor *m)
+ {
+-	unsigned int mw, my, ty;
++	unsigned int mw, my, ty, draw_borders = 1;
+ 	int i, n = 0;
+ 	Client *c;
+ 
+@@ -2737,11 +2753,11 @@ tile(Monitor *m)
+ 			continue;
+ 		if (i < m->nmaster) {
+ 			resize(c, (struct wlr_box){.x = m->w.x, .y = m->w.y + my, .width = mw,
+-				.height = (m->w.height - my) / (MIN(n, m->nmaster) - i)}, 0);
++				.height = (m->w.height - my) / (MIN(n, m->nmaster) - i)}, 0, draw_borders);
+ 			my += c->geom.height;
+ 		} else {
+ 			resize(c, (struct wlr_box){.x = m->w.x + mw, .y = m->w.y + ty,
+-				.width = m->w.width - mw, .height = (m->w.height - ty) / (n - i)}, 0);
++				.width = m->w.width - mw, .height = (m->w.height - ty) / (n - i)}, 0, draw_borders);
+ 			ty += c->geom.height;
+ 		}
+ 		i++;
