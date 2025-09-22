@@ -40,6 +40,7 @@ static const char *const autostart[] = {
 		"kdeconnectd", NULL,
 		"mpd-mpris", NULL,
 		"/home/oc/Scripts/playerctl-loopW", NULL,
+		"/home/oc/Scripts/Pywal", NULL,
 		NULL /* terminate */
 };
 

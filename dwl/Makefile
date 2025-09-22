@@ -68,6 +68,7 @@ dist: clean
 	rm -rf dwl-$(VERSION)
 
 install: dwl
+	cp config.def.h config.h
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	rm -f $(DESTDIR)$(PREFIX)/bin/dwl
 	cp -f dwl $(DESTDIR)$(PREFIX)/bin
