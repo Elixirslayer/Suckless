@@ -32,15 +32,13 @@ static int log_level = WLR_ERROR;
 
 /* Autostart */
 static const char *const autostart[] = {
-		// "wbg", "-s", "/home/oc/wallpapers/landscape7.jpg", NULL,
+		"gentoo-pipewire-launcher", NULL,
 		"dunst", NULL,
 		"waybar", NULL,
-		"input-remapper-control", "--command", "autoload", NULL,
-		"mpd-discord-rpc", NULL,
-		"kdeconnectd", NULL,
-		"mpd-mpris", NULL,
 		"/home/oc/Scripts/playerctl-loopW", NULL,
-		"/home/oc/Scripts/Pywal", NULL,
+		"swaybg", "-i", "/mnt/HDD/Wallpaper/Just The Two Of Us.png", "-m", "fill", NULL,
+		"kdeconnectd", NULL,
+		"wl-paste", "--primary", "--watch", "cliphist", "store", NULL,
 		NULL /* terminate */
 };
 
@@ -51,7 +49,7 @@ static const Rule rules[] = {
 		/* examples: */
 		{ "firefox-nightly", NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1	},
 		{ "qutebrowser",	 NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1	},
-		{ "LibreWolf",       NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1	},
+		{ "librewolf",       NULL,       1 << 0,    0,          -1,      -1,     -1,     -1,     -1	},
 		{ "discord",         NULL,       1 << 6,    0,          -1,      -1,     -1,     -1,     -1	},
 		{ "Spotify",         NULL,       1 << 7,    0,          -1,      -1,     -1,     -1,     -1	},
 		{ "YouTube Music",   NULL,       1 << 7,    0,          -1,      -1,     -1,     -1,     -1	},
@@ -135,8 +133,8 @@ static const uint32_t send_events_mode = LIBINPUT_CONFIG_SEND_EVENTS_ENABLED;
    LIBINPUT_CONFIG_ACCEL_PROFILE_FLAT
    LIBINPUT_CONFIG_ACCEL_PROFILE_ADAPTIVE
    */
-static const enum libinput_config_accel_profile accel_profile = LIBINPUT_CONFIG_ACCEL_PROFILE_ADAPTIVE;
-static const double accel_speed = 0.0;
+static const enum libinput_config_accel_profile accel_profile = LIBINPUT_CONFIG_ACCEL_PROFILE_FLAT;
+static const double accel_speed = -0.5;
 
 /* You can choose between:
    LIBINPUT_CONFIG_TAP_MAP_LRM -- 1/2/3 finger tap maps to left/right/middle
@@ -169,7 +167,7 @@ static const Key keys[] = {
 		{ Alt,                    XKB_KEY_b,          togglebar,      {0} },
 		{ Alt,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 		{ Alt|Shift, XKB_KEY_Return,     spawn,          {.v = termcmd} },
-		{ Alt|Shift, XKB_KEY_F,		     spawn,          SHCMD("qutebrowser") },
+		{ Alt|Shift, XKB_KEY_F,		     spawn,          SHCMD("librewolf") },
 		{ Alt|Shift, XKB_KEY_E,		     spawn,          SHCMD("nautilus") },
 		{ Alt|Shift, XKB_KEY_D,		     spawn,          SHCMD("discord") },
 		{ Alt|Shift, XKB_KEY_W, 		 spawn, 		 SHCMD("setsid -w -f foot --app-id=wttr.in --hold -e curl wttr.in/456001") },
